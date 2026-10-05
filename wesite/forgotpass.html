@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot password &mdash; FestiveShop</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <div class="auth-card">
+        <span class="eyebrow">Account recovery</span>
+        <h1>Forgot password</h1>
+        <p class="sub">Enter the email you signed up with and we will send you a reset link.</p>
+
+        <form data-reset novalidate>
+            <div class="field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+                <span class="err">Enter a valid email address.</span>
+            </div>
+
+            <button type="submit" class="btn btn--gold btn--block">Send reset link</button>
+        </form>
+
+        <div data-reset-done hidden>
+            <div class="notice">
+                <span aria-hidden="true">&#9993;</span>
+                <div>
+                    <strong>Check your inbox.</strong><br>
+                    <span style="font-size:.88rem;">If an account exists for that address, a reset link is on its way. This is a demo, so no real email is sent.</span>
+                </div>
+            </div>
+            <a class="btn btn--ghost btn--block" href="Login.html">Back to log in</a>
+        </div>
+
+        <p class="auth-alt">
+            Remembered it? <a href="Login.html">Log in instead</a>
+        </p>
+    </div>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('forgotpass.html');
+
+    var form = document.querySelector('[data-reset]');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var input = form.email;
+        var valid = input.value.trim() !== '' && input.checkValidity();
+
+        input.closest('.field').dataset.invalid = valid ? 'false' : 'true';
+        if (!valid) return;
+
+        form.hidden = true;
+        document.querySelector('[data-reset-done]').hidden = false;
+        Shop.toast('Reset link sent.', '📨');
+    });
+</script>
+</body>
+</html>

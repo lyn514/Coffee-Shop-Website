@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "CANDY CANE LATTE",
+        "image": "Candy latte.jpg",
+        "sign":"&#8369;",
+        "price": 179.00
+    },
+    {
+        "id": 2,
+        "name": "APPLE CIDER CHAI LATTE",
+        "image": "Apple cider chai.jpg",
+        "sign": "&#8369;",
+        "price": 210.00
+    },
+    {
+        "id": 3,
+        "name": "GINGERBREAD MAPLE LATTE",
+        "image": "Gingerbread latte.jpg",
+        "sign": "&#8369;",
+        "price": 200.00
+    },
+    {
+        "id": 4,
+        "name": "CANNOLI BITES",
+        "image": "cannoli.avif",
+        "sign": "&#8369;",
+        "price": 65.00
+    },
+    {
+        "id": 5,
+        "name": "GINGERBREAD COOKIES",
+        "image": "gingerbread cookies.avif",
+        "sign": "&#8369;",
+        "price": 50.00
+    },
+    {
+        "id": 6,
+        "name": "SANTA HAT CUPCAKE",
+        "image": "santa-hat-cupcakes.avif",
+        "sign": "&#8369;",
+        "price": 40.00
+    }
+]

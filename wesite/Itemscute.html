@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plushies</title>
+    <meta name="description" content="A delightful collection of high-quality, soft and huggable plush toys.">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <nav class="crumbs">
+        <a href="home.html">Home</a> <span>/</span> <span>Plushies</span>
+    </nav>
+
+    <div class="section-head" style="margin-top:0;">
+        <div>
+            <span class="eyebrow">&#129418; Store two</span>
+            <h1>Plushies</h1>
+            <p>Discover a world of plush happiness. We carefully curate our collection of soft, cuddly toys,
+               ensuring each one is made with love and high-quality materials.</p>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <label class="search">
+            <span class="search__icon" aria-hidden="true">&#128269;</span>
+            <span class="sr-only">Search plushies</span>
+            <input type="search" placeholder="Search rabbits, bears, foxes&hellip;" data-search>
+        </label>
+        <div class="chips" data-chips>
+            <button type="button" class="chip" data-filter="all" aria-pressed="true">Everything</button>
+            <button type="button" class="chip" data-filter="gift" aria-pressed="false">Gift picks</button>
+            <button type="button" class="chip" data-filter="premium" aria-pressed="false">Premium</button>
+            <button type="button" class="chip" data-filter="value" aria-pressed="false">Under &#8369;250</button>
+        </div>
+    </div>
+
+    <div class="grid" data-grid></div>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('Itemscute.html');
+
+    var state = { term: '', filter: 'all' };
+
+    function matches(product) {
+        if (state.filter === 'gift' && product.tag !== 'Gift pick') return false;
+        if (state.filter === 'premium' && product.tag !== 'Premium') return false;
+        if (state.filter === 'value' && product.price >= 250) return false;
+        return true;
+    }
+
+    function render() {
+        var list = getProducts('plush', state.term).filter(matches);
+        Shop.mountGrid('[data-grid]', list);
+    }
+
+    document.querySelector('[data-search]').addEventListener('input', function (event) {
+        state.term = event.target.value;
+        render();
+    });
+
+    document.querySelector('[data-chips]').addEventListener('click', function (event) {
+        var chip = event.target.closest('[data-filter]');
+        if (!chip) return;
+        state.filter = chip.dataset.filter;
+        this.querySelectorAll('[data-filter]').forEach(function (button) {
+            button.setAttribute('aria-pressed', button === chip ? 'true' : 'false');
+        });
+        render();
+    });
+
+    render();
+</script>
+</body>
+</html>

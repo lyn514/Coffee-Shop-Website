@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register &mdash; FestiveShop</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <div class="auth-card">
+        <span class="eyebrow">Join us</span>
+        <h1>Create an account</h1>
+        <p class="sub">It takes about thirty seconds and you only need an email.</p>
+
+        <form data-register novalidate>
+            <div class="form-row">
+                <div class="field">
+                    <label for="first-name">First name</label>
+                    <input id="first-name" name="firstName" type="text" required autocomplete="given-name">
+                    <span class="err">Required.</span>
+                </div>
+                <div class="field">
+                    <label for="last-name">Last name</label>
+                    <input id="last-name" name="lastName" type="text" required autocomplete="family-name">
+                    <span class="err">Required.</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+                <span class="err">Enter a valid email address.</span>
+            </div>
+
+            <div class="field">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" required pattern="[0-9+\-\s]{7,15}" placeholder="0917 000 0000">
+                <span class="err">Enter a valid phone number.</span>
+            </div>
+
+            <div class="field">
+                <label for="birth">Date of birth</label>
+                <input id="birth" name="birth" type="date" required max="2012-12-31">
+                <span class="err">Please pick a date.</span>
+            </div>
+
+            <div class="field">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select…</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Prefer to say</option>
+                </select>
+                <span class="err">Please choose an option.</span>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required minlength="6" autocomplete="new-password">
+                    <span class="err">At least 6 characters.</span>
+                </div>
+                <div class="field">
+                    <label for="confirm">Confirm password</label>
+                    <input id="confirm" name="confirm" type="password" required minlength="6" autocomplete="new-password">
+                    <span class="err">Must match your password.</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="about">About you</label>
+                <textarea id="about" name="about" rows="3" placeholder="Tell us what you like…"></textarea>
+            </div>
+
+            <label class="check">
+                <input type="checkbox" name="terms" required> I agree to the terms &amp; conditions
+            </label>
+            <span class="err" data-terms-err style="display:none;color:#ff9d9d;font-size:.8rem;margin:-14px 0 16px;">
+                Please accept the terms.
+            </span>
+
+            <button type="submit" class="btn btn--gold btn--block">Create account</button>
+        </form>
+
+        <p class="auth-alt">
+            Already have an account? <a href="Login.html">Log in</a>
+        </p>
+
+        <div class="socials">
+            <a href="https://www.facebook.com/" rel="noopener">&#10024; Sign up with Facebook</a>
+            <a href="https://www.instagram.com/" rel="noopener">&#10024; Sign up with Instagram</a>
+        </div>
+    </div>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('registration.html');
+
+    document.querySelector('[data-register]').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var form = this;
+        var ok = true;
+
+        form.querySelectorAll('[required]').forEach(function (input) {
+            if (input.type === 'checkbox') return;
+            var valid = input.value.trim() !== '' && input.checkValidity();
+            var field = input.closest('.field');
+            if (field) field.dataset.invalid = valid ? 'false' : 'true';
+            if (!valid) ok = false;
+        });
+
+        var terms = form.querySelector('[name="terms"]');
+        var termsOk = terms.checked;
+        form.querySelector('[data-terms-err]').style.display = termsOk ? 'none' : 'block';
+        if (!termsOk) ok = false;
+
+        if (form.password.value !== form.confirm.value) {
+            form.confirm.closest('.field').dataset.invalid = 'true';
+            ok = false;
+        }
+
+        if (!ok) {
+            Shop.toast('Please fix the highlighted fields.', '⚠️');
+            return;
+        }
+
+        Shop.toast('Account created. Please log in.', '🎉');
+        window.setTimeout(function () {
+            window.location.href = 'Login.html';
+        }, 1000);
+    });
+</script>
+</body>
+</html>

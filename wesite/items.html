@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product details</title>
+    <meta name="description" content="Product details for FestiveShop.">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <nav class="crumbs" data-crumbs></nav>
+
+    <div data-detail></div>
+
+    <section data-related-section hidden>
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">You might also like</span>
+                <h2>More from this shop</h2>
+            </div>
+        </div>
+        <div class="grid" data-related></div>
+    </section>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('items.html');
+
+    function storePage(store) {
+        return STORES[store] ? STORES[store].page : 'home.html';
+    }
+
+    function renderMissing() {
+        document.querySelector('[data-detail]').innerHTML =
+            '<div class="empty"><div class="big">&#128269;</div>' +
+            '<p><strong>No product selected.</strong></p>' +
+            '<p style="margin-top:8px;">Pick something from the shop to see its details.</p>' +
+            '<p style="margin-top:20px;">' +
+            '<a class="btn btn--gold btn--sm" href="menu.html">Coffee menu</a> ' +
+            '<a class="btn btn--ghost btn--sm" href="Itemscute.html">Plushies</a>' +
+            '</p></div>';
+        document.querySelector('[data-crumbs]').innerHTML =
+            '<a href="home.html">Home</a> <span>/</span> <span>Product</span>';
+    }
+
+    function render(product) {
+        document.title = product.name + ' — FestiveShop';
+        document.querySelector('[data-crumbs]').innerHTML =
+            '<a href="home.html">Home</a> <span>/</span> ' +
+            '<a href="' + storePage(product.store) + '">' + STORES[product.store].short + '</a> ' +
+            '<span>/</span> <span>' + Shop.escapeHTML(product.name) + '</span>';
+
+        const specs = product.store === 'coffee'
+            ? [['Size', product.size], ['Brew', product.brew], ['Beans', product.origin]]
+            : [['Size', product.size], ['Material', product.material], ['Care', product.care]];
+
+        document.querySelector('[data-detail]').innerHTML =
+            '<div class="detail">' +
+            '<div class="detail__media"><img src="' + product.image + '" alt="' +
+            Shop.escapeHTML(product.name) + '"></div>' +
+            '<div>' +
+            '<span class="badge badge--ok">' + Shop.escapeHTML(product.tag || 'In stock') + '</span>' +
+            '<h1>' + Shop.escapeHTML(product.name) + '</h1>' +
+            '<p style="color:#a99c8d;font-size:.95rem;">' +
+            stars(product.rating) + ' ' + product.rating + ' &middot; ' +
+            product.reviews + ' reviews</p>' +
+            '<div class="detail__price">' + formatPrice(product.price) + '</div>' +
+            '<p class="detail__desc">' + Shop.escapeHTML(product.description) + '</p>' +
+            '<div class="detail__actions">' +
+            '<button type="button" class="btn btn--gold" data-add="' + product.id + '">Add to cart</button>' +
+            '<button type="button" class="btn btn--ghost" data-cart-open>View cart</button>' +
+            '<a class="btn btn--ghost" href="' + storePage(product.store) + '">Back to shop</a>' +
+            '</div>' +
+            '<div class="specs">' +
+            specs.map(function (row) {
+                return '<div><span>' + row[0] + '</span><strong>' +
+                    Shop.escapeHTML(row[1]) + '</strong></div>';
+            }).join('') +
+            '<div><span>Delivery</span><strong>2&ndash;4 days</strong></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        const others = getProducts(product.store).filter(function (p) {
+            return p.id !== product.id;
+        }).slice(0, 4);
+
+        if (others.length) {
+            document.querySelector('[data-related-section]').hidden = false;
+            Shop.mountGrid('[data-related]', others);
+        }
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var product = getProduct(params.get('id'));
+
+    if (product) {
+        render(product);
+    } else {
+        renderMissing();
+    }
+</script>
+</body>
+</html>

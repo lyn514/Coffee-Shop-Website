@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FestiveShop &mdash; Choose a Store</title>
+    <meta name="description" content="A Christmas coffee and dessert counter and a shelf full of plushies, in one little website.">
+    <style>
+        :root {
+            --gold: #CEAC5C;
+            --gold-light: #e8d9b0;
+            --red: #BD3634;
+            --cream: #F5EDE0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 44px;
+            padding: 48px 20px;
+            font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            background-color: #1b1410;
+            background-image:
+                radial-gradient(1200px 600px at 15% -10%, rgba(189, 54, 52, 0.35), transparent 60%),
+                radial-gradient(1000px 600px at 90% 0%, rgba(47, 107, 79, 0.3), transparent 60%),
+                linear-gradient(180deg, #221812 0%, #1b1410 45%, #14100d 100%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 .accent {
+            color: var(--gold);
+        }
+
+        .eyebrow {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .stores {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .card {
+            display: block;
+            width: 290px;
+            padding: 32px 26px;
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(206, 172, 92, 0.3);
+            border-radius: 24px;
+            transition: transform 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: var(--gold);
+        }
+
+        .card .icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .card h2 {
+            margin: 14px 0 8px;
+            font-size: 1.45rem;
+        }
+
+        .card p {
+            font-size: 0.94rem;
+            color: #b3a698;
+        }
+
+        .sitemap {
+            width: 100%;
+            max-width: 860px;
+            padding: 28px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(206, 172, 92, 0.22);
+            border-radius: 24px;
+        }
+
+        .sitemap h3 {
+            font-size: 0.82rem;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .sitemap ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 12px;
+            justify-content: center;
+        }
+
+        .sitemap a {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(206, 172, 92, 0.25);
+            color: var(--gold-light);
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .sitemap a:hover {
+            background: rgba(206, 172, 92, 0.16);
+            color: #fff;
+        }
+
+        .note {
+            font-size: 0.85rem;
+            color: #8d8175;
+            max-width: 60ch;
+        }
+
+        footer {
+            font-size: 0.85rem;
+            color: #8d8175;
+        }
+
+        footer a {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <span class="eyebrow">&#10024; Season's greetings</span>
+        <h1>Festive<span class="accent">Shop</span></h1>
+    </div>
+
+    <div class="stores">
+        <a class="card" href="wesite/home.html">
+            <div class="icon">&#9749;</div>
+            <h2>Christmas Coffee &amp; Dessert</h2>
+            <p>Festive lattes, cannoli bites and gingerbread cookies. Six products, baked fresh daily.</p>
+        </a>
+
+        <a class="card" href="wesite/Itemscute.html">
+            <div class="icon">&#128054;</div>
+            <h2>Plushies</h2>
+            <p>Soft, cuddly and huggable. Ten plushies for every taste and every gift list.</p>
+        </a>
+    </div>
+
+    <div class="sitemap">
+        <h3>Every page in this project</h3>
+        <ul>
+            <li><a href="wesite/home.html">Home</a></li>
+            <li><a href="wesite/menu.html">Coffee menu</a></li>
+            <li><a href="wesite/Itemscute.html">Plushies</a></li>
+            <li><a href="wesite/items.html">Product detail</a></li>
+            <li><a href="wesite/Aboutcute.html">About us</a></li>
+            <li><a href="wesite/contactcute.html">Contact</a></li>
+            <li><a href="wesite/Login.html">Log in</a></li>
+            <li><a href="wesite/registration.html">Register</a></li>
+            <li><a href="wesite/forgotpass.html">Forgot password</a></li>
+        </ul>
+    </div>
+
+    <p class="note">
+        This is the entry point for the whole project. Open it, or start any live server in this
+        folder and visit the address it prints &mdash; this file is what it serves.
+    </p>
+
+    <footer>
+        Built with plain HTML, CSS and JavaScript. No frameworks.
+    </footer>
+
+</body>
+</html>

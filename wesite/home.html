@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FestiveShop &mdash; Christmas Coffee &amp; Plushies</title>
+    <meta name="description" content="A Christmas coffee and dessert counter and a shelf full of plushies, in one little website.">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <section class="hero">
+        <div>
+            <span class="hero__eyebrow">&#10024; Season's greetings</span>
+            <h1>Warm up this <span class="accent">Christmas</span></h1>
+            <p class="hero__lead">
+                Whether you are cozying up by the fireplace or gathering with loved ones, our festive
+                blends are sure to bring holiday cheer to every sip. From smooth, velvety classics to
+                bold, spiced seasonal roasts, there is something for every coffee lover on your list.
+            </p>
+            <div class="hero__cta">
+                <a class="btn btn--primary" href="menu.html">Browse the coffee menu</a>
+                <a class="btn btn--ghost" href="Itemscute.html">Visit the plush shelf</a>
+            </div>
+            <div class="hero__stats">
+                <div>
+                    <strong>16</strong>
+                    <span>Products</span>
+                </div>
+                <div>
+                    <strong>2</strong>
+                    <span>Shops</span>
+                </div>
+                <div>
+                    <strong>4.8&#9733;</strong>
+                    <span>Avg rating</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero__art">
+            <img src="Candy latte.jpg" alt="Candy cane latte">
+            <img src="Apple cider chai.jpg" alt="Apple cider chai latte">
+            <img src="images/cinnamoroll white.jpg" alt="Cinnamoroll plush in a white bear costume">
+            <img src="images/fox.jpg" alt="Plush fox">
+        </div>
+    </section>
+
+    <section>
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Popular right now</span>
+                <h2>Fan favourites</h2>
+                <p>A short list of the things people keep coming back for.</p>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="menu.html">See everything</a>
+        </div>
+        <div class="grid" data-featured></div>
+    </section>
+
+    <section>
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">Two shops, one website</span>
+                <h2>Pick your aisle</h2>
+            </div>
+        </div>
+        <div class="grid">
+            <article class="card">
+                <div class="card__media">
+                    <img src="gingerbread cookies.avif" alt="Gingerbread cookies">
+                    <span class="card__tag">&#9749; Coffee &amp; Dessert</span>
+                </div>
+                <div class="card__body">
+                    <h3 class="card__title">Christmas Coffee &amp; Dessert</h3>
+                    <p class="card__desc">
+                        Festive lattes alongside cannoli bites, gingerbread cookies and a Santa hat cupcake.
+                        Baked fresh every morning.
+                    </p>
+                    <div class="card__foot">
+                        <span class="price">6 items<small>From &#8369;40.00</small></span>
+                        <a class="btn btn--primary btn--sm" href="menu.html">Open shop</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card__media">
+                    <img src="images/teddy bear.jpg" alt="Plush teddy bear in a piggy costume">
+                    <span class="card__tag">&#129418; Plushies</span>
+                </div>
+                <div class="card__body">
+                    <h3 class="card__title">Plushies</h3>
+                    <p class="card__desc">
+                        A delightful collection of high-quality, soft and huggable plush toys for every taste,
+                        from classic characters to unique designs.
+                    </p>
+                    <div class="card__foot">
+                        <span class="price">10 items<small>From &#8369;150.00</small></span>
+                        <a class="btn btn--primary btn--sm" href="Itemscute.html">Open shop</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-head">
+            <div>
+                <span class="eyebrow">How it works</span>
+                <h2>Three steps, then cookies</h2>
+            </div>
+        </div>
+        <div class="grid">
+            <article class="card">
+                <div class="card__body">
+                    <h3 class="card__title">1. Browse</h3>
+                    <p class="card__desc">Every product has a photo, a price and an honest description.</p>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card__body">
+                    <h3 class="card__title">2. Fill your cart</h3>
+                    <p class="card__desc">Your cart follows you around the site, even if you change pages.</p>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card__body">
+                    <h3 class="card__title">3. Check out</h3>
+                    <p class="card__desc">Pick a payment method and we will get it on its way to you.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('home.html');
+
+    // show a few favourites from both stores
+    Shop.mountGrid('[data-featured]', ['c3', 'p6', 'c4', 'p1'].map(getProduct));
+</script>
+</body>
+</html>

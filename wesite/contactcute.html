@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us &mdash; FestiveShop</title>
+    <meta name="description" content="Questions about an order, a delivery or a product? Send us a message.">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <nav class="crumbs">
+        <a href="home.html">Home</a> <span>/</span> <span>Contact</span>
+    </nav>
+
+    <div class="section-head" style="margin-top:0;">
+        <div>
+            <span class="eyebrow">Contact</span>
+            <h1>Talk to us</h1>
+            <p>Questions about an order, a delivery window or which plush to get? Send a message and we will reply within one business day.</p>
+        </div>
+    </div>
+
+    <div class="detail" style="align-items:start;">
+
+        <div class="auth-card" style="margin:0;width:100%;">
+            <h2 style="font-size:1.4rem;">Send a message</h2>
+            <p class="sub">Fields marked are required.</p>
+
+            <form data-contact novalidate>
+                <div class="form-row">
+                    <div class="field">
+                        <label for="ct-name">Your name</label>
+                        <input id="ct-name" name="name" type="text" required autocomplete="name">
+                        <span class="err">Required.</span>
+                    </div>
+                    <div class="field">
+                        <label for="ct-email">Email</label>
+                        <input id="ct-email" name="email" type="email" required autocomplete="email">
+                        <span class="err">Enter a valid email.</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="ct-topic">What is this about?</label>
+                    <select id="ct-topic" name="topic" required>
+                        <option value="">Select…</option>
+                        <option value="order">An order</option>
+                        <option value="delivery">Delivery</option>
+                        <option value="product">A product question</option>
+                        <option value="other">Something else</option>
+                    </select>
+                    <span class="err">Please choose a topic.</span>
+                </div>
+
+                <div class="field">
+                    <label for="ct-message">Message</label>
+                    <textarea id="ct-message" name="message" rows="6" required placeholder="How can we help?"></textarea>
+                    <span class="err">Please write a message.</span>
+                </div>
+
+                <button type="submit" class="btn btn--gold btn--block">Send message</button>
+            </form>
+        </div>
+
+        <div>
+            <div class="card" style="margin-bottom:20px;">
+                <div class="card__body">
+                    <h3 class="card__title">Visit the shop</h3>
+                    <p class="card__desc">
+                        12 Stall Number, Greenhills Shopping Centre<br>
+                        San Juan, Metro Manila
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom:20px;">
+                <div class="card__body">
+                    <h3 class="card__title">Opening hours</h3>
+                    <p class="card__desc">
+                        Monday to Friday &mdash; 9:00 &ndash; 21:00<br>
+                        Saturday &mdash; 9:00 &ndash; 22:00<br>
+                        Sunday &mdash; 10:00 &ndash; 20:00
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__body">
+                    <h3 class="card__title">Social media</h3>
+                    <div class="socials" style="margin-top:6px;">
+                        <a href="https://www.facebook.com/" rel="noopener">
+                            <img src="facebook.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                            Facebook
+                        </a>
+                        <a href="https://www.instagram.com/" rel="noopener">
+                            <img src="OIP.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                            Instagram
+                        </a>
+                        <a href="https://x.com/" rel="noopener">
+                            <img src="twitter.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                            X
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('contactcute.html');
+
+    document.querySelector('[data-contact]').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var ok = true;
+
+        this.querySelectorAll('[required]').forEach(function (input) {
+            var valid = input.value.trim() !== '' && input.checkValidity();
+            input.closest('.field').dataset.invalid = valid ? 'false' : 'true';
+            if (!valid) ok = false;
+        });
+
+        if (!ok) {
+            Shop.toast('Please fix the highlighted fields.', '⚠️');
+            return;
+        }
+
+        event.target.reset();
+        Shop.toast('Message sent. We will reply within one business day.', '📨');
+    });
+</script>
+</body>
+</html>

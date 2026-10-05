@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Coffee &amp; Dessert Menu</title>
+    <meta name="description" content="Festive lattes, cannoli bites, gingerbread cookies and a Santa hat cupcake.">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body class="site">
+
+<header data-site-nav></header>
+
+<main class="site-main">
+
+    <nav class="crumbs">
+        <a href="home.html">Home</a> <span>/</span> <span>Coffee &amp; Dessert</span>
+    </nav>
+
+    <div class="section-head" style="margin-top:0;">
+        <div>
+            <span class="eyebrow">&#9749; Store one</span>
+            <h1>Christmas Coffee &amp; Dessert</h1>
+            <p>Six things worth warming your hands around. Lattes are brewed to order; everything in the pastry case is baked fresh each morning.</p>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <label class="search">
+            <span class="search__icon" aria-hidden="true">&#128269;</span>
+            <span class="sr-only">Search the menu</span>
+            <input type="search" placeholder="Search lattes and desserts&hellip;" data-search>
+        </label>
+        <div class="chips" data-chips>
+            <button type="button" class="chip" data-filter="all" aria-pressed="true">Everything</button>
+            <button type="button" class="chip" data-filter="drinks" aria-pressed="false">Lattes</button>
+            <button type="button" class="chip" data-filter="desserts" aria-pressed="false">Desserts</button>
+            <button type="button" class="chip" data-filter="deal" aria-pressed="false">Under &#8369;100</button>
+        </div>
+    </div>
+
+    <div class="notice">
+        <span aria-hidden="true">&#128164;</span>
+        <span>Orders placed before 3pm are baked and boxed the same day. Delivery is 2&ndash;4 days within the city.</span>
+    </div>
+
+    <div class="grid" data-grid></div>
+
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script src="products.js"></script>
+<script src="site.js"></script>
+<script>
+    Shop.init('menu.html');
+
+    var state = { term: '', filter: 'all' };
+
+    function matches(product) {
+        if (state.filter === 'drinks' && product.tag === 'Dessert') return false;
+        if (state.filter === 'desserts' && product.tag !== 'Dessert') return false;
+        if (state.filter === 'deal' && product.price >= 100) return false;
+        return true;
+    }
+
+    function render() {
+        var list = getProducts('coffee', state.term).filter(matches);
+        Shop.mountGrid('[data-grid]', list);
+    }
+
+    document.querySelector('[data-search]').addEventListener('input', function (event) {
+        state.term = event.target.value;
+        render();
+    });
+
+    document.querySelector('[data-chips]').addEventListener('click', function (event) {
+        var chip = event.target.closest('[data-filter]');
+        if (!chip) return;
+        state.filter = chip.dataset.filter;
+        this.querySelectorAll('[data-filter]').forEach(function (button) {
+            button.setAttribute('aria-pressed', button === chip ? 'true' : 'false');
+        });
+        render();
+    });
+
+    render();
+</script>
+</body>
+</html>
